@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="76876112-11dd-446d-a701-2fd292199e46" name="Default Changelist" comment="">
+    <list default="true" id="76876112-11dd-446d-a701-2fd292199e46" name="Default Changelist" comment="sorted by salary and age descending">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/apiproject/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/apiproject/MainApp.java" afterDir="false" />
     </list>
@@ -48,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/apiproject/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="542">
-              <caret line="132" column="5" lean-forward="true" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
+            <state relative-caret-position="1188">
+              <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -154,7 +154,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587551371279" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587551574396" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/ApiEmployees" />
   </component>
   <component name="RunDashboard">
@@ -214,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587550806240</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="sorted by salary and age descending">
+      <created>1587551410456</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587551410456</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -252,7 +259,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changes" />
     <MESSAGE value="sorted by age" />
-    <option name="LAST_COMMIT_MESSAGE" value="sorted by age" />
+    <MESSAGE value="sorted by salary and age descending" />
+    <option name="LAST_COMMIT_MESSAGE" value="sorted by salary and age descending" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Temp1_ApiEmployees..zip/src/main/java/Config.java">
@@ -359,8 +367,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/apiproject/MainApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="132" column="5" lean-forward="true" selection-start-line="132" selection-start-column="5" selection-end-line="132" selection-end-column="5" />
+        <state relative-caret-position="1188">
+          <caret line="112" lean-forward="true" selection-start-line="112" selection-end-line="112" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

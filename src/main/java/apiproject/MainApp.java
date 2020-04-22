@@ -75,6 +75,8 @@ public class MainApp implements Runnable {
             employee.setSalary(Double.parseDouble(overThirty.get("employee_salary").toString()));
             if (employee.getAge() > 30) {
                 employeesList2.add(employee);
+            } else {
+                System.out.println(" There are no people over 30");
             }
 
         }
@@ -111,12 +113,12 @@ public class MainApp implements Runnable {
 
     private List<Employee> sortByAgeDescending(String json) {
         JSONObject ageDescending = new JSONObject(json);
-        JSONArray jsonArrayEmployeesSalary = ageDescending.getJSONArray("data");
+        JSONArray jsonArrayEmployeesAgeDescending = ageDescending.getJSONArray("data");
 
         List<Employee> employeesList4 = new ArrayList<>();
 
-        for (int i = 0; i < jsonArrayEmployeesSalary.length(); i++) {
-            JSONObject ageDescendingSorted = (JSONObject) jsonArrayEmployeesSalary.get(i);
+        for (int i = 0; i < jsonArrayEmployeesAgeDescending.length(); i++) {
+            JSONObject ageDescendingSorted = (JSONObject) jsonArrayEmployeesAgeDescending.get(i);
             Employee employee = new Employee();
             employee.setId(Integer.parseInt(ageDescendingSorted.get("id").toString()));
             employee.setAge(Double.parseDouble(ageDescendingSorted.get("employee_age").toString()));
@@ -128,7 +130,7 @@ public class MainApp implements Runnable {
         employeesList4.sort(Comparator.comparing(Employee::getAge).reversed());
         System.out.println(employeesList4);
         System.out.println(employeesList4.size());
-        System.out.println(jsonArrayEmployeesSalary.length());
+        System.out.println(jsonArrayEmployeesAgeDescending.length());
         return employeesList4;
     }
 }
