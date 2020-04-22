@@ -29,6 +29,8 @@ public class MainApp implements Runnable {
             String response = new HTTPService().connect(Config.APP_URL);
             parseJson(response);
             over30(response);
+            sortedViaSalary(response);
+            sortByAgeDescending(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,10 +79,56 @@ public class MainApp implements Runnable {
 
         }
         System.out.println("Logs: ");
-        System.out.println(employeesList2);;
+        System.out.println(employeesList2);
         System.out.println(employeesList2.size());
         System.out.println(jsonArrayEmployeesOver30.length());
         return employeesList2;
 
+    }
+
+    private List<Employee> sortedViaSalary(String json) {
+        JSONObject salary = new JSONObject(json);
+        JSONArray jsonArrayEmployeesSalary = salary.getJSONArray("data");
+
+        List<Employee> employeesList3 = new ArrayList<>();
+
+        for (int i = 0; i < jsonArrayEmployeesSalary.length(); i++) {
+            JSONObject salarySorted = (JSONObject) jsonArrayEmployeesSalary.get(i);
+            Employee employee = new Employee();
+            employee.setId(Integer.parseInt(salarySorted.get("id").toString()));
+            employee.setAge(Double.parseDouble(salarySorted.get("employee_age").toString()));
+            employee.setName(salarySorted.get("employee_name").toString());
+            employee.setSalary(Double.parseDouble(salarySorted.get("employee_salary").toString()));
+        }
+
+        System.out.println("Logs: ");
+        employeesList3.sort(Comparator.comparing(Employee::getSalary));
+        System.out.println(employeesList3);
+        System.out.println(employeesList3.size());
+        System.out.println(jsonArrayEmployeesSalary.length());
+        return employeesList3;
+    }
+
+    private List<Employee> sortByAgeDescending(String json) {
+        JSONObject ageDescending = new JSONObject(json);
+        JSONArray jsonArrayEmployeesSalary = ageDescending.getJSONArray("data");
+
+        List<Employee> employeesList4 = new ArrayList<>();
+
+        for (int i = 0; i < jsonArrayEmployeesSalary.length(); i++) {
+            JSONObject ageDescendingSorted = (JSONObject) jsonArrayEmployeesSalary.get(i);
+            Employee employee = new Employee();
+            employee.setId(Integer.parseInt(ageDescendingSorted.get("id").toString()));
+            employee.setAge(Double.parseDouble(ageDescendingSorted.get("employee_age").toString()));
+            employee.setName(ageDescendingSorted.get("employee_name").toString());
+            employee.setSalary(Double.parseDouble(ageDescendingSorted.get("employee_salary").toString()));
+        }
+
+        System.out.println("Logs: ");
+        employeesList4.sort(Comparator.comparing(Employee::getAge).reversed());
+        System.out.println(employeesList4);
+        System.out.println(employeesList4.size());
+        System.out.println(jsonArrayEmployeesSalary.length());
+        return employeesList4;
     }
 }
