@@ -2,6 +2,7 @@ package apiproject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -27,6 +28,7 @@ public class MainApp implements Runnable {
         try {
             String response = new HTTPService().connect(Config.APP_URL);
             parseJson(response);
+            over30(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,4 +58,29 @@ public class MainApp implements Runnable {
         return employeesList;
     }
 
+    private List<Employee> over30(String json) {
+        JSONObject over30 = new JSONObject(json);
+        JSONArray jsonArrayEmployeesOver30 = over30.getJSONArray("data");
+
+        List<Employee> employeesList2 = new ArrayList<>();
+
+        for (int i = 0; i < jsonArrayEmployeesOver30.length(); i++) {
+            JSONObject overThirty = (JSONObject) jsonArrayEmployeesOver30.get(i);
+            Employee employee = new Employee();
+            employee.setId(Integer.parseInt(overThirty.get("id").toString()));
+            employee.setAge(Double.parseDouble(overThirty.get("employee_age").toString()));
+            employee.setName(overThirty.get("employee_name").toString());
+            employee.setSalary(Double.parseDouble(overThirty.get("employee_salary").toString()));
+            if (employee.getAge() > 30) {
+                employeesList2.add(employee);
+            }
+
+        }
+        System.out.println("Logs: ");
+        System.out.println(employeesList2);;
+        System.out.println(employeesList2.size());
+        System.out.println(jsonArrayEmployeesOver30.length());
+        return employeesList2;
+
+    }
 }
