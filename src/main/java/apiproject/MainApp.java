@@ -2,7 +2,6 @@ package apiproject;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -28,9 +27,6 @@ public class MainApp implements Runnable {
         try {
             String response = new HTTPService().connect(Config.APP_URL);
             parseJson(response);
-            over30(response);
-            sortedViaSalary(response);
-            sortByAgeDescending(response);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,77 +56,15 @@ public class MainApp implements Runnable {
         return employeesList;
     }
 
-    private List<Employee> over30(String json) {
-        JSONObject over30 = new JSONObject(json);
-        JSONArray jsonArrayEmployeesOver30 = over30.getJSONArray("data");
-
-        List<Employee> employeesList2 = new ArrayList<>();
-
-        for (int i = 0; i < jsonArrayEmployeesOver30.length(); i++) {
-            JSONObject overThirty = (JSONObject) jsonArrayEmployeesOver30.get(i);
-            Employee employee = new Employee();
-            employee.setId(Integer.parseInt(overThirty.get("id").toString()));
-            employee.setAge(Double.parseDouble(overThirty.get("employee_age").toString()));
-            employee.setName(overThirty.get("employee_name").toString());
-            employee.setSalary(Double.parseDouble(overThirty.get("employee_salary").toString()));
-            if (employee.getAge() > 30) {
-                employeesList2.add(employee);
-            } else {
-                System.out.println(" There are no people over 30");
-            }
-
-        }
-        System.out.println("Logs: ");
-        System.out.println(employeesList2);
-        System.out.println(employeesList2.size());
-        System.out.println(jsonArrayEmployeesOver30.length());
-        return employeesList2;
-
+    private List<Employee> sortBySalary(List<Employee> employeesList){
+        return employeesList != null ? employeesList.stream().sorted(Comparator.comparingDouble(Employee::getSalary)).collect(Collectors.toList()) : null;
     }
 
-    private List<Employee> sortedViaSalary(String json) {
-        JSONObject salary = new JSONObject(json);
-        JSONArray jsonArrayEmployeesSalary = salary.getJSONArray("data");
-
-        List<Employee> employeesList3 = new ArrayList<>();
-
-        for (int i = 0; i < jsonArrayEmployeesSalary.length(); i++) {
-            JSONObject salarySorted = (JSONObject) jsonArrayEmployeesSalary.get(i);
-            Employee employee = new Employee();
-            employee.setId(Integer.parseInt(salarySorted.get("id").toString()));
-            employee.setAge(Double.parseDouble(salarySorted.get("employee_age").toString()));
-            employee.setName(salarySorted.get("employee_name").toString());
-            employee.setSalary(Double.parseDouble(salarySorted.get("employee_salary").toString()));
-        }
-
-        System.out.println("Logs: ");
-        employeesList3.sort(Comparator.comparing(Employee::getSalary));
-        System.out.println(employeesList3);
-        System.out.println(employeesList3.size());
-        System.out.println(jsonArrayEmployeesSalary.length());
-        return employeesList3;
+    private List<Employee> sortByAgeDesc(List<Employee> employeesList){
+        return employeesList != null ? employeesList.stream().sorted(Comparator.comparingDouble(Employee::getAge).reversed()).collect(Collectors.toList()) : null;
+    }
+    private List<Employee> getEmployeesOlderThan30(List<Employee> employeesList){
+        return employeesList != null ? employeesList.stream().filter(f -> f.getAge() > 30).collect(Collectors.toList()) : null;
     }
 
-    private List<Employee> sortByAgeDescending(String json) {
-        JSONObject ageDescending = new JSONObject(json);
-        JSONArray jsonArrayEmployeesAgeDescending = ageDescending.getJSONArray("data");
-
-        List<Employee> employeesList4 = new ArrayList<>();
-
-        for (int i = 0; i < jsonArrayEmployeesAgeDescending.length(); i++) {
-            JSONObject ageDescendingSorted = (JSONObject) jsonArrayEmployeesAgeDescending.get(i);
-            Employee employee = new Employee();
-            employee.setId(Integer.parseInt(ageDescendingSorted.get("id").toString()));
-            employee.setAge(Double.parseDouble(ageDescendingSorted.get("employee_age").toString()));
-            employee.setName(ageDescendingSorted.get("employee_name").toString());
-            employee.setSalary(Double.parseDouble(ageDescendingSorted.get("employee_salary").toString()));
-        }
-
-        System.out.println("Logs: ");
-        employeesList4.sort(Comparator.comparing(Employee::getAge).reversed());
-        System.out.println(employeesList4);
-        System.out.println(employeesList4.size());
-        System.out.println(jsonArrayEmployeesAgeDescending.length());
-        return employeesList4;
-    }
 }
